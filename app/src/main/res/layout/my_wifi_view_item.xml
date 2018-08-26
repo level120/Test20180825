@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kr.ac.tu.wtf.test20180825.CheckableLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/itemImg"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/itemtext"
+        android:id="@+id/itemText"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_weight="5" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/check"
+        android:focusable="false"
+        android:clickable="false"
+        android:layout_weight="1" />
+
+</kr.ac.tu.wtf.test20180825.CheckableLinearLayout>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Test20180825</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="p_text1">CSV 파일 저장 위치</string>
+    <string name="path_hint">CSV 저장 위치</string>
+    <string name="p_text2">CSV 파일명(기본값 : .csv)</string>
+    <string name="name_hint">CSV 파일명</string>
+
+    <string name="no_title">no title</string>
+    <string name="progressbar">진행상태</string>
+    <string name="nofity">실행 버튼을 누른 후 다른 탭으로 이동하지 마세요.</string>
+    <string name="itemtext">itemText</string>
+    <string name="wi_fi">Wi-Fi 등록</string>
+</resources>

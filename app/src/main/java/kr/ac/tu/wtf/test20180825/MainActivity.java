@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 // '프래그먼트2' 호출
                 if (setupFrag.isReady()) {
-                    transaction.replace(R.id.fragment_container, MeasureFragment.newInstance(setupFrag.pathFileName()));
+                    String[] args = setupFrag.pathFileName();
+                    transaction.replace(R.id.fragment_container, MeasureFragment.newInstance(args[0], args[1]));
                     transaction.commit();
                 }
                 else {

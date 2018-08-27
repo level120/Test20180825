@@ -4,11 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -16,17 +16,19 @@ import android.widget.ToggleButton;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 
 public class MeasureFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String FILEPATH = "file_path";
+    private static final String FILENAME = "file_name";
 
     private ToggleButton btnRun;
     private TextView resNoti;
-    private String mParamPath;
+    private String mParamPath, mParamName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,10 +36,11 @@ public class MeasureFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MeasureFragment newInstance(String param1) {
+    public static MeasureFragment newInstance(String param1, String param2) {
         MeasureFragment fragment = new MeasureFragment();
         Bundle args = new Bundle();
         args.putString(FILEPATH, param1);
+        args.putString(FILENAME, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +50,7 @@ public class MeasureFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParamPath = getArguments().getString(FILEPATH);
+            mParamName = getArguments().getString(FILENAME);
         }
     }
 
@@ -58,7 +62,7 @@ public class MeasureFragment extends Fragment {
 
         btnRun = v.findViewById(R.id.btnRun);
         resNoti = v.findViewById(R.id.resEdit);
-        resNoti.setText(mParamPath);
+        resNoti.setText(mParamPath + File.separator + mParamName);
 
         initEvent();
 
@@ -75,6 +79,7 @@ public class MeasureFragment extends Fragment {
                         runWriteCsv();
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.e("err", e.toString());
                     }
                 }
                 else {
@@ -85,15 +90,15 @@ public class MeasureFragment extends Fragment {
     }
 
     private void runWriteCsv() throws IOException {
-        File f = new File(mParamPath);
-        CSVWriter writer;
-
-        if (f.exists() && !f.isDirectory()) {
-            writer = new CSVWriter(new FileWriter(f, true));
-        }
-        else {
-            writer = new CSVWriter(new FileWriter(f));
-        }
+//        new File(mParamPath + File.separator).mkdirs();
+        CSVWriter writer = new CSVWriter(
+                new OutputStreamWriter(
+//                        new FileOutputStream(mParamPath + File.separator + mParamName)
+                        new FileOutputStream(
+                                new File(mParamPath, mParamName)
+                        )
+                )
+        );
 
         String[] data = { "test", "data", "...", "checked" };
         writer.writeNext(data);

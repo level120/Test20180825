@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.support.v4.app.ActivityCompat;
@@ -42,11 +43,14 @@ public class RssiScan {
     }
 
     private void initRssi() {
-        wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(WIFI_SERVICE);
+        wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(true);
         wifiManager.startScan();
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction("android.intent.RECEIVE_LOCATION");
 
         activity.registerReceiver(WifiReceiver, filter);
     }
@@ -77,7 +81,6 @@ public class RssiScan {
 
     /* API 23 이후부터 적용 */
     private void checkPermission() {
-        Log.e("check","permission");
         final int MY_PERMISSIONS_REQUEST_READ_WIFI = 3;
 
         if (ContextCompat.checkSelfPermission(activity,

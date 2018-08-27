@@ -24,11 +24,11 @@ public class SetupFragment extends Fragment {
 
     private String path ="", fname = "", output = "output";
 
-    public String pathFileName() {
+    public String[] pathFileName() {
         if (fname.matches("^\\S+.(?i)(csv|xls|xlsx)$"))
-            return path + File.separator + output + File.separator + fname;
+            return new String[] { path + File.separator + output, fname };
         else
-            return path + File.separator + output + File.separator + fname + ".csv";
+            return new String[] { path + File.separator + output, fname + ".csv" };
     }
 
     public boolean isReady() {
@@ -55,7 +55,7 @@ public class SetupFragment extends Fragment {
         btnWifi = v.findViewById(R.id.btnWifi);
         nameEdit = v.findViewById(R.id.filenameEdit);
         pathEdit = v.findViewById(R.id.pathEdit);
-        path = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        path = getContext().getFilesDir().getAbsolutePath();
         //fname = 중복이름 찾아서 뒤에 숫자 +1.csv
         //nameEdit.setText(fname);
         pathEdit.setText(path);

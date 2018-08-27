@@ -22,13 +22,13 @@ public class SetupFragment extends Fragment {
     private EditText pathEdit, nameEdit;
     private Button btnWifi;
 
-    private String path ="", fname = "";
+    private String path ="", fname = "", output = "output";
 
     public String pathFileName() {
         if (fname.matches("^\\S+.(?i)(csv|xls|xlsx)$"))
-            return path + File.separator + fname;
+            return path + File.separator + output + File.separator + fname;
         else
-            return path + File.separator + fname + ".csv";
+            return path + File.separator + output + File.separator + fname + ".csv";
     }
 
     public boolean isReady() {

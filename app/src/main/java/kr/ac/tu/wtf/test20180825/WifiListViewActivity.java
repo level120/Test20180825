@@ -5,6 +5,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,6 +19,8 @@ public class WifiListViewActivity extends AppCompatActivity {
     private ListView list;
     private WifiChoiceListViewAdapter a;
     private RssiScan rs;
+
+    public static ArrayList<WifiListViewItem> wifiList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +43,34 @@ public class WifiListViewActivity extends AppCompatActivity {
     private void init() {
         a.removeAll();
         if (rs.searchWifi()) {
-            ArrayList<ScanResult> res = rs.results;
-
-            for (int i = 0, size = res.size(); i < size; ++i) {
-                a.addItem(ContextCompat.getDrawable(this, R.drawable.ic_wifi_black_36dp), res.get(i).SSID);
-            }
-        }
-        else {
-            a.addItem(ContextCompat.getDrawable(this, R.drawable.ic_notifications_black_24dp), "No Data");
+            duplicationJob();
         }
     }
 
-    /* 동작하지 않음, 뒤로가기 버튼 조치 필요, Activity -> Fragment */
+    private void duplicationJob() {
+        ArrayList<ScanResult> res = rs.results;
+
+        for (int i = 0, size = res.size(); i < size; ++i) {
+            boolean isChecked = false;
+
+            for (int j=0, _size = wifiList.size(); j < _size; ++j) {
+                if (res.get(i).BSSID.equals(wifiList.get(j).BSSID)
+                        && res.get(i).SSID.equals(wifiList.get(j).SSID)) {
+                    isChecked = true;
+                    break;
+                }
+            }
+            a.addItem(ContextCompat.getDrawable(this, R.drawable.ic_wifi_black_36dp), res.get(i).SSID, res.get(i).BSSID, String.format("%s\n(%s)", res.get(i).SSID, res.get(i).BSSID), isChecked);
+        }
+        debug();
+    }
+
+    private void debug() {
+        for (int i=0, size=wifiList.size(); i<size; ++i) {
+            Log.i("debug", String.format("%s - %b", wifiList.get(i).text, wifiList.get(i).isChecked));
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if(getFragmentManager().getBackStackEntryCount() > 0)

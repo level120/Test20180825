@@ -12,13 +12,10 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.WIFI_SERVICE;
 
 public class RssiScan {
     private WifiManager wifiManager;
@@ -75,7 +72,6 @@ public class RssiScan {
             return false;
         }
 
-        Log.e("check", "apList -> " + apList.size() + ", res -> " + results.size());
         return true;
     }
 

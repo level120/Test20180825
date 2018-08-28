@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/itemImg"
+        android:layout_gravity="left"
         android:layout_weight="1" />
 
     <TextView
@@ -18,14 +19,16 @@
         android:id="@+id/itemText"
         android:textSize="20sp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:layout_weight="5" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/check"
+        android:id="@+id/itemCheck"
         android:focusable="false"
         android:clickable="false"
+        android:layout_gravity="right"
         android:layout_weight="1" />
 
 </kr.ac.tu.wtf.test20180825.CheckableLinearLayout>

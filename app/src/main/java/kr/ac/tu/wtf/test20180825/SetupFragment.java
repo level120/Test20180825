@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,7 +56,7 @@ public class SetupFragment extends Fragment {
         btnWifi = v.findViewById(R.id.btnWifi);
         nameEdit = v.findViewById(R.id.filenameEdit);
         pathEdit = v.findViewById(R.id.pathEdit);
-        path = getContext().getFilesDir().getAbsolutePath();
+        path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
         //fname = 중복이름 찾아서 뒤에 숫자 +1.csv
         //nameEdit.setText(fname);
         pathEdit.setText(path);

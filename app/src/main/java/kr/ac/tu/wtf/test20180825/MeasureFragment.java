@@ -1,9 +1,13 @@
 package kr.ac.tu.wtf.test20180825;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +80,7 @@ public class MeasureFragment extends Fragment {
                 if (b) {
                     Toast.makeText(getActivity().getApplicationContext(), "작업 시작!", Toast.LENGTH_SHORT).show();
                     try {
+//                        checkPermisson();
                         runWriteCsv();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -87,6 +92,36 @@ public class MeasureFragment extends Fragment {
                 }
             }
         });
+    }
+
+    /* Activity를 받아서 적용필요 */
+    private void checkPermisson() {
+        final int MY_PERMISSIONS_REQUEST_READ_APP = 1;
+
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                Toast.makeText(getActivity(), "앱 실행을 위해서는 외부저장소 쓰기 권한을 설정해야 합니다", Toast.LENGTH_LONG).show();
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_APP);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
     }
 
     private void runWriteCsv() throws IOException {

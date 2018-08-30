@@ -50,6 +50,7 @@ public class WifiChoiceListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.itemImg);
         TextView textTextView = (TextView) convertView.findViewById(R.id.itemText);
         CheckBox cBox = (CheckBox) convertView.findViewById(R.id.itemCheck);
+        CheckableLinearLayout cBoxGlobal = (CheckableLinearLayout) convertView.findViewById(R.id.itemGlobal);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         final WifiListViewItem listViewItem = list.get(position);
@@ -57,7 +58,8 @@ public class WifiChoiceListViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         iconImageView.setImageDrawable(listViewItem.icon);
         textTextView.setText(listViewItem.text);
-        cBox.setChecked(listViewItem.isChecked);
+        cBoxGlobal.setChecked(listViewItem.isChecked);
+//        cBox.setChecked(listViewItem.isChecked);
 
         cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 

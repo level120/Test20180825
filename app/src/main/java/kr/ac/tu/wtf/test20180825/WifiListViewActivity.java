@@ -6,9 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -60,9 +57,15 @@ public class WifiListViewActivity extends AppCompatActivity {
                     break;
                 }
             }
-            a.addItem(ContextCompat.getDrawable(this, R.drawable.ic_wifi_black_36dp), res.get(i).SSID, res.get(i).BSSID, String.format("%s\n(%s)", res.get(i).SSID, res.get(i).BSSID), isChecked);
+            a.addItem(
+                    ContextCompat.getDrawable(this, R.drawable.ic_wifi_black_36dp),
+                    res.get(i).SSID,
+                    res.get(i).BSSID,
+                    String.format("%s\n(%s)", res.get(i).SSID, res.get(i).BSSID),
+                    isChecked
+            );
         }
-        debug();
+//        findViewById(R.id.wifiListView).invalidate(); // refersh
     }
 
     private void debug() {

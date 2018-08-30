@@ -14,4 +14,5 @@
     <string name="nofity">실행 버튼을 누른 후 다른 탭으로 이동하지 마세요.</string>
     <string name="itemtext">itemText</string>
     <string name="wi_fi">Wi-Fi 등록</string>
+    <string name="distance">거리</string>
 </resources>

@@ -5,7 +5,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -66,12 +65,6 @@ public class WifiListViewActivity extends AppCompatActivity {
             );
         }
 //        findViewById(R.id.wifiListView).invalidate(); // refersh
-    }
-
-    private void debug() {
-        for (int i=0, size=wifiList.size(); i<size; ++i) {
-            Log.i("debug", String.format("%s - %b", wifiList.get(i).text, wifiList.get(i).isChecked));
-        }
     }
 
     @Override
